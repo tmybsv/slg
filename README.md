@@ -9,7 +9,8 @@ im not yet really familiar with golang modules ecosystem so lets install by old 
 ```sh
 git clone https://github.com/mishkafreddy2009/slg
 cd slg
-doas/sudo make install
+doas make install
+# or sudo make install
 ```
 
 ## usage
