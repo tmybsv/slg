@@ -15,8 +15,6 @@ doas make install
 
 ## usage
 
-basic:
-
 ```sh
 slg test
 ```
