@@ -1,4 +1,4 @@
-build: all
+build:
 	go build -o slg cmd/slg/main.go
 install:
 	ASSETS_DIR=/usr/local/share/slg/assets/en/ugly/ go build -o slg cmd/slg/main.go
