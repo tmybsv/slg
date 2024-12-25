@@ -56,28 +56,18 @@ func generateLettersToImagesMap(style, lang, dir string) (map[string]string, err
 	return m, nil
 }
 
-var (
-	style     string
-	lang      string
-	assetsDir string
-	outDir    string
-)
+var assetsDir = "assets/en/ugly"
 
-func initFlags() {
+func main() {
+	var (
+		style string
+		lang  string
+	)
 	flag.StringVar(&style, "style", "ugly", "generated word style")
 	flag.StringVar(&style, "s", "ugly", "generated word style")
 	flag.StringVar(&lang, "lang", "en", "generated language")
 	flag.StringVar(&lang, "l", "en", "generated language")
-}
-
-func main() {
-	initFlags()
 	flag.Parse()
-
-	assetsDir, exists := os.LookupEnv("ASSETS_DIR")
-	if !exists {
-		assetsDir = "assets/en/ugly/"
-	}
 
 	lettersToImages, err := generateLettersToImagesMap(style, lang, assetsDir)
 	if err != nil {
