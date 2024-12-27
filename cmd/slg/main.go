@@ -62,9 +62,7 @@ func main() {
 		style string
 		lang  string
 	)
-	flag.StringVar(&style, "style", "ugly", "generated word style")
 	flag.StringVar(&style, "s", "ugly", "generated word style")
-	flag.StringVar(&lang, "lang", "en", "generated language")
 	flag.StringVar(&lang, "l", "en", "generated language")
 	flag.Parse()
 
@@ -86,7 +84,12 @@ func main() {
 			fmt.Printf("slg: failed to open image: %v\n", err)
 			os.Exit(1)
 		}
-		defer imgFile.Close()
+		defer func() {
+			if err := imgFile.Close(); err != nil {
+				fmt.Printf("slg: failed to close image: %v\n", err)
+				os.Exit(1)
+			}
+		}()
 
 		img, err := png.Decode(imgFile)
 		if err != nil {
@@ -122,7 +125,12 @@ func main() {
 		fmt.Printf("slg: failed to output image: %v\n", err)
 		os.Exit(1)
 	}
-	defer outImgFile.Close()
+	defer func() {
+		if err := outImgFile.Close(); err != nil {
+			fmt.Printf("slg: failed to close image: %v\n", err)
+			os.Exit(1)
+		}
+	}()
 
 	if err := png.Encode(outImgFile, outImg); err != nil {
 		fmt.Printf("slg: failed to encode image: %v\n", err)
